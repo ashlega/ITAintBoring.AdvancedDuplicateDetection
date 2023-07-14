@@ -80,7 +80,7 @@
       </Addresses>
     </Publisher>
     <RootComponents>
-      <RootComponent type="300" schemaName="ita_itabusinessrulesadmincopy_62109" behavior="0" />
+      <RootComponent type="300" schemaName="ita_itabusinessrulesadmin_b186c" behavior="0" />
       <RootComponent type="91" id="{a6eed22b-2563-457a-9d2c-3fbfba15f984}" schemaName="ITAintBoring.AdvancedDuplicateDetection.AdminPlugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f252f745f8d3f30e" behavior="0" />
     </RootComponents>
     <MissingDependencies />

@@ -5,16 +5,13 @@ Seeting up pac auth profile:
 
 Use pac auth create --url https://<..>.dynamics.com/ to create an authorization profile
 
-To export solutions:
+To export and unpack solutions:
 
 del ./Solutions/* -r
 pac solution export --path ./Solutions --name ITABusinessRules --managed
 pac solution export --path ./Solutions --name ITABusinessRules 
 pac solution export --path ./Solutions --name ITABusinessRulesRuntime --managed
 pac solution export --path ./Solutions --name ITABusinessRulesRuntime 
-
-
-To unpack it:
 
 pac solution unpack --zipfile .\Solutions\ITABusinessRules.zip --folder .\Solutions\ITABusinessRules --packagetype Both
 pac solution unpack --zipfile .\Solutions\ITABusinessRulesRuntime.zip --folder .\Solutions\ITABusinessRulesRuntime --packagetype Both
