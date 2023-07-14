@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ita_action">
+  <description default="Action Name (create/update/delete)">
+    <label description="Action Name (create/update/delete)" languagecode="1033" />
+  </description>
+  <displayname default="Action">
+    <label description="Action" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>action</name>
+  <type>10</type>
+</customapirequestparameter>

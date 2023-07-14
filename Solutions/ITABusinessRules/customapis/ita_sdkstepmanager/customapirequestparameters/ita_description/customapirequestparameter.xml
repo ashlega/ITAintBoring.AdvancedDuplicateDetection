@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ita_description">
+  <description default="Step description">
+    <label description="Step description" languagecode="1033" />
+  </description>
+  <displayname default="Description">
+    <label description="Description" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>description</name>
+  <type>10</type>
+</customapirequestparameter>

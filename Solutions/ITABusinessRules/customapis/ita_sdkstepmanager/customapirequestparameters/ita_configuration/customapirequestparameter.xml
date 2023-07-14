@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ita_configuration">
+  <description default="Step Configuration">
+    <label description="Step Configuration" languagecode="1033" />
+  </description>
+  <displayname default="Configuration">
+    <label description="Configuration" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>configuration</name>
+  <type>10</type>
+</customapirequestparameter>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="ITAintBoring.AdvancedDuplicateDetection.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f252f745f8d3f30e" PluginAssemblyId="f00d1f6e-0d59-4f4c-ab53-b89332dbb449" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/ITAintBoringAdvancedDuplicateDetectionBusinessLogi-F00D1F6E-0D59-4F4C-AB53-B89332DBB449/ITAintBoringAdvancedDuplicateDetectionBusinessLogi.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="ITAintBoring.AdvancedDuplicateDetection.BusinessLogic.DuplicateDetection, ITAintBoring.AdvancedDuplicateDetection.BusinessLogic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f252f745f8d3f30e" PluginTypeId="a57f245c-c7ac-475a-abc3-68baeb7beb6c" Name="ITAintBoring.AdvancedDuplicateDetection.BusinessLogic.DuplicateDetection">
+      <FriendlyName>97870797-dc09-4198-8d17-a9d7095b04cd</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

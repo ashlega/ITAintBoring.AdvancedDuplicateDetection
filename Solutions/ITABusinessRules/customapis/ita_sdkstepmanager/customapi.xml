@@ -1,0 +1,18 @@
+<customapi uniquename="ita_sdkstepmanager">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Manage plugin execution steps for ITA business rules">
+    <label description="Manage plugin execution steps for ITA business rules" languagecode="1033" />
+  </description>
+  <displayname default="ITA SDK Step Manager">
+    <label description="ITA SDK Step Manager" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>ITASDKStepManager</name>
+  <plugintypeid>
+    <plugintypeexportkey>e6362af5-e53b-4ba3-a9de-73f4bbe23366</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>1</workflowsdkstepenabled>
+</customapi>

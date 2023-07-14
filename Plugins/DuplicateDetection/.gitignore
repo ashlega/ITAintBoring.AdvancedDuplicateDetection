@@ -1,0 +1,5 @@
+*.cache
+*.FileListAbsolute.txt
+obj/
+bin/Debug/DataExtract.Plugins.dll
+bin/Debug/DataExtract.Plugins.pdb

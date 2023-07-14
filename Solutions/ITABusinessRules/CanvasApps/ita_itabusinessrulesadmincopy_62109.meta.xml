@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>ita_itabusinessrulesadmincopy_62109</Name>
+  <AppVersion>2023-07-14T00:20:36Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23071.11.0</CreatedByClientVersion>
+  <MinClientVersion>3.23071.11.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23071.11","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>ITA Business Rules Admin - copy</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"NotSpecified","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Sdk Message Processing Steps":{"entitySetName":"sdkmessageprocessingsteps","logicalName":"sdkmessageprocessingstep"},"Sdk Messages":{"entitySetName":"sdkmessages","logicalName":"sdkmessage"},"Plug-in Assemblies":{"entitySetName":"pluginassemblies","logicalName":"pluginassembly"},"Sdk Message Filters":{"entitySetName":"sdkmessagefilters","logicalName":"sdkmessagefilter"},"environment_39a902ba":{"entitySetName":"Environment","logicalName":"environment_39a902ba"}}}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"sdkmessageprocessingstep","componenttype":1},{"logicalname":"sdkmessage","componenttype":1},{"logicalname":"pluginassembly","componenttype":1},{"logicalname":"sdkmessagefilter","componenttype":1}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/ita_itabusinessrulesadmincopy_62109_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/ita_itabusinessrulesadmincopy_62109_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

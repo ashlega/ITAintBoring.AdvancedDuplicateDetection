@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ita_stepid">
+  <description default="Step Id for delete/update">
+    <label description="Step Id for delete/update" languagecode="1033" />
+  </description>
+  <displayname default="Step ID">
+    <label description="Step ID" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>stepId</name>
+  <type>12</type>
+</customapirequestparameter>
