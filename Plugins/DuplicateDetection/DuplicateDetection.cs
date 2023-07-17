@@ -7,15 +7,39 @@ using System.Text;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
+using System.Linq;
 
 namespace ITAintBoring.AdvancedDuplicateDetection.BusinessLogic
 {
     [DataContract]
-    public class PluginConfig
+    public class QueryData
     {
         [DataMember] public string FetchXML;
         [DataMember] public string ErrorMessage;
+        [DataMember] public bool ErrorWhenEmpty = false;
+        
+        [DataMember] public bool ErrorWhenNotEmpty = false;
+        [DataMember] public bool SuccessWhenEmpty = false;
+        [DataMember] public bool SuccessWhenNotEmpty = false;
+        [DataMember] public string QueryName;
+        [DataMember] public int QueryOrder;
+        
+
+        public Entity result = null;
+
+    }
+
+    [DataContract]
+    public class PluginConfig
+    {
+        [DataMember] public QueryData[] QueryList;
+        [DataMember] public bool HideQueryErrors = false;
+
+        [DataMember] public string FetchXML;
+        [DataMember] public string ErrorMessage;
+
         [DataMember] public bool ErrorWhenEmpty;
+        [DataMember] public bool IgnoreQueryErrors = false;
 
     }
 
@@ -36,6 +60,27 @@ namespace ITAintBoring.AdvancedDuplicateDetection.BusinessLogic
             var ser = new DataContractJsonSerializer(deserializedConfig.GetType());
             config = ser.ReadObject(ms) as PluginConfig;
             ms.Close();
+            List<QueryData> queryList = null;
+            if (config.QueryList == null || config.QueryList.Length == 0)
+            {
+                queryList = new List<QueryData>();
+                queryList.Add(new QueryData()
+                {
+                    ErrorMessage = config.ErrorMessage,
+                    ErrorWhenEmpty = config.ErrorWhenEmpty,
+                    FetchXML = config.FetchXML,
+                    QueryName = "Main",
+                    QueryOrder = 1
+                }
+                );
+                config.QueryList = queryList.ToArray();
+            }
+            else
+            {
+                queryList = new List<QueryData>(config.QueryList);
+            }
+            queryList.Sort((a, b) => { return a.QueryOrder - b.QueryOrder; });
+            config.QueryList = queryList.ToArray();
         }
 
 
@@ -65,11 +110,25 @@ namespace ITAintBoring.AdvancedDuplicateDetection.BusinessLogic
             else if (value is bool) result = ((bool)record[key]).ToString();
             else if (value is DateTime) result = ((DateTime)record[key]).ToString();
             else if (value is string) result += (string)value;
-            
+            else if (value is Guid) result += value.ToString();
+
             return result;
         }
 
-
+        public string ProcessTemplate(Entity record, string templatePrefix, string fetchXml)
+        {
+            if (record != null)
+            {
+                string value = null;
+                foreach (var attr in record.Attributes)
+                {
+                    value = getStringValue(record, attr.Key);
+                    fetchXml = fetchXml.Replace("{" + (templatePrefix != null ? templatePrefix + "." : "") + attr.Key + "}", value);
+                }
+                fetchXml = fetchXml.Replace("{" + (templatePrefix != null ? templatePrefix + "." : "") + record.LogicalName + "id}", record.Id.ToString());
+            }
+            return fetchXml;
+        }
         public void Execute(IServiceProvider serviceProvider)
         {
             
@@ -83,35 +142,54 @@ namespace ITAintBoring.AdvancedDuplicateDetection.BusinessLogic
 
             if (config != null)
             {
-                string fetchXml = config.FetchXML;
-                int count = 0;
-                try
+                for(int queryIndex = 0; queryIndex < config.QueryList.Length; queryIndex++)
                 {
-                   
-                    string value = null;
-                    foreach (var attr in target.Attributes)
+                    var query = config.QueryList[queryIndex];
+                    string fetchXml = query.FetchXML;
+                    bool goodUpToTheQuery = false;
+                    try
                     {
-                        value = getStringValue(target, attr.Key);
-                        fetchXml = fetchXml.Replace("{" + attr.Key + "}", value);
+
+                        string value = context.InitiatingUserId.ToString();
+                        fetchXml = fetchXml.Replace("{modifiedby}", value);
+                        //fetchXml = fetchXml.Replace("{id}", context.PrimaryEntityId.ToString());
+                        fetchXml = ProcessTemplate(target, null, fetchXml);
+
+                        for(int i = 0; i < queryIndex; i++)
+                        {
+                            
+                            fetchXml = ProcessTemplate(config.QueryList[i].result, config.QueryList[i].QueryName, fetchXml);
+                        }
+                                                
+                        FetchExpression fe = new FetchExpression(fetchXml);
+                        goodUpToTheQuery = true;
+                        query.result = service.RetrieveMultiple(fe).Entities.FirstOrDefault();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!goodUpToTheQuery || !config.HideQueryErrors)
+                        {
+                            throw new InvalidPluginExecutionException("Query: " + query.QueryName + ". " + ex.Message + fetchXml);
+                        }
+                        else return;
+                        
+                    }
+                    //throw new InvalidPluginExecutionException(count.ToString() + config.ErrorWhenEmpty.ToString());
+
+                    if(query.result != null && query.ErrorWhenNotEmpty ||
+                       query.result == null && query.ErrorWhenEmpty)
+                    {
+                        throw new InvalidPluginExecutionException(query.ErrorMessage);
+                    }
+                    if (query.result != null && query.SuccessWhenNotEmpty ||
+                       query.result == null && query.SuccessWhenEmpty)
+                    {
+                        return;
                     }
 
-                    value = context.InitiatingUserId.ToString();
-                    fetchXml = fetchXml.Replace("{modifiedby}", value);
-                    FetchExpression fe = new FetchExpression(fetchXml);
-                    count = service.RetrieveMultiple(fe).Entities.Count;
+                    
                 }
-                catch (Exception ex)
-                {
-                    throw new InvalidPluginExecutionException(ex.Message + fetchXml);
-                }
-
-                //throw new InvalidPluginExecutionException(count.ToString() + config.ErrorWhenEmpty.ToString());
-                if ((count > 0 && !config.ErrorWhenEmpty) ||
-                    (count == 0 && config.ErrorWhenEmpty))
-                {
-                    throw new InvalidPluginExecutionException(config.ErrorMessage);
-                }
-                
 
             }
             

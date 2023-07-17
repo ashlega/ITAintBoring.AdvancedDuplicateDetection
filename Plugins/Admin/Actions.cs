@@ -28,6 +28,7 @@ namespace ITAintBoring.AdvancedDuplicateDetection.Admin
          * stepId - stepid for existing step (for update/delete)
          * action - CreateStep/UpdateStep/DeleteStep
          * ita_tablename - table/enttiy name
+         * ita_stage - 10/20/40
          * 
          */
 
@@ -56,7 +57,8 @@ namespace ITAintBoring.AdvancedDuplicateDetection.Admin
                 string configuration = context.InputParameters.Contains("ita_configuration") ? (string)context.InputParameters["ita_configuration"] : null;
                 OptionSetValue mode = new OptionSetValue(0);
                 int rank = 1;
-                OptionSetValue stage = new OptionSetValue(10);
+                int stageNumber = context.InputParameters.Contains("ita_stage") ? (int)context.InputParameters["ita_stage"] : 10;
+                OptionSetValue stage = new OptionSetValue(stageNumber);
                 OptionSetValue supportedDeployment = new OptionSetValue(0);
                 OptionSetValue invocationSource = new OptionSetValue(0);
                 
@@ -121,6 +123,7 @@ namespace ITAintBoring.AdvancedDuplicateDetection.Admin
                     step["description"] = description;
                     step["configuration"] = configuration;
                     step["filteringattributes"] = stepAttributes;
+                    step["stage"] = stage;
                     //step["mode"] = mode;
                     //step["rank"] = rank;
                     //step["stage"] = stage;

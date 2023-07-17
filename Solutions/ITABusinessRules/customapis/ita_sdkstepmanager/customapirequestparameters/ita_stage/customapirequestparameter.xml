@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ita_stage">
+  <description default="Stage Number">
+    <label description="Stage Number" languagecode="1033" />
+  </description>
+  <displayname default="ITA Stage">
+    <label description="ITA Stage" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>ITA Stage</name>
+  <type>7</type>
+</customapirequestparameter>
