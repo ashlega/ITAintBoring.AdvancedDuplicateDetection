@@ -136,7 +136,13 @@ namespace ITAintBoring.AdvancedDuplicateDetection.BusinessLogic
             var serviceFactory =
                 (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
 
-            var target = (Entity)context.InputParameters["Target"];
+            Entity target = null;
+            if(context.InputParameters["Target"] is EntityReference)
+            {
+                EntityReference targetRef = (EntityReference)context.InputParameters["Target"];
+                target = new Entity(targetRef.LogicalName, targetRef.Id);
+            }
+            else target = (Entity)context.InputParameters["Target"];
 
             var service = serviceFactory.CreateOrganizationService(context.UserId);
 
